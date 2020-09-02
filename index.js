@@ -77,8 +77,7 @@ try {
     });
 
     // Must Be Last Line. Code to Login Bot to Discord Server
-    // client.login(process.env.BOT_TOKEN);     
-    client.login('NzUwNDk2ODUwNzMzMTcwODA5.X07YqA.jFyVLmjgGcTGBNLICXKBK-AMVBY');
+    client.login(process.env.BOT_TOKEN);     
 }
 catch (err) {
     console.log(utility.returnTimeError() + err);
