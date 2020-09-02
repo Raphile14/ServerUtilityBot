@@ -1,0 +1,22 @@
+{
+  "name": "serverutilitybot",
+  "version": "1.0.0",
+  "description": "A Discord Utility Bot for Server Processess",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raphile14/ServerUtilityBot.git"
+  },
+  "author": "Raphael Dalangin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raphile14/ServerUtilityBot/issues"
+  },
+  "homepage": "https://github.com/Raphile14/ServerUtilityBot#readme",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
