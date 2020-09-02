@@ -2,6 +2,9 @@ module.exports = {
     name: 'help',
     description: 'Help Command',
     execute(message, args) {
-        message.channel.send('Help List: ');
+        message.reply({embed: {
+            color: 3447003,
+            description: 'Help List: '
+        }});
     }
 }

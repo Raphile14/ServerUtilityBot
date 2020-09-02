@@ -2,6 +2,9 @@
 A Discord Utility Bot for handling certain processes. IN DEVELOPMENT
 
 # Changelog
+indev 0.0.3 (September 2, 2020)
+- Improved code
+
 indev 0.0.2 (September 2, 2020)
 - Bug Fixes
 - Heroku Hosting
