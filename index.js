@@ -19,7 +19,7 @@ try {
 
     // Variables
     const botName = client.commands.get('config').bot_name;
-    const password = client.commands.get('config').password;
+    const password = window.prompt("Input Password: ");
     const prefix = client.commands.get('config').prefix;
 
     // Logic
