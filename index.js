@@ -19,7 +19,7 @@ try {
 
     // Variables
     const botName = client.commands.get('config').bot_name;
-    const password = window.prompt("Input Password: ");
+    // const password = window.prompt("Input Password: ");
     const prefix = client.commands.get('config').prefix;
 
     // Logic
@@ -64,7 +64,7 @@ try {
     });
 
     // Must Be Last Line. Code to Login Bot to Discord Server
-    client.login(password);     
+    client.login(process.env.BOT_TOKEN);     
 }
 catch (err) {
     console.log(utility.returnTimeError() + err);
