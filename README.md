@@ -10,6 +10,9 @@ A Discord Utility Bot for handling certain processes.
 - Roles based from Excel Sheet
 
 # Changelog
+indev 1.0.1 (September 4, 2020)
+- Code changes
+
 indev 1.0.0 (September 4, 2020)
 - Able to detect attachments in Discord
 - Will only accept xlsx

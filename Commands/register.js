@@ -50,7 +50,10 @@ module.exports = {
                                 else if (studentYear == '3') {
                                     roleYear = message.guild.roles.cache.find(role => role.name === '3rd Year');
                                 }
-                                
+                                // console.log(split[0] + " " + split[1]);
+                                // if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('I don\'t have permission to change your nickname!');
+                                // // message.member.setNickname(message.content.replace('changeNick ', ''));
+                                // message.member.setNickname(split[0] + " " + split[1]);
                                 message.member.roles.add(roleProgram);
                                 message.member.roles.add(roleYear);
                                 cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status'] = true;

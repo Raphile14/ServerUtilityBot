@@ -144,7 +144,7 @@ try {
     });
 
     // Must Be Last Line. Code to Login Bot to Discord Server
-    client.login(process.env.BOT_TOKEN);  
+    client.login(process.env.BOT_TOKEN);
 }
 catch (err) {
     utility.log(1, err); 
