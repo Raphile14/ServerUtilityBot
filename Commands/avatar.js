@@ -1,8 +1,9 @@
 module.exports = {
     name: 'avatar',
-    description: 'Avatar Command',
+    description: "Return caller's avatar",
     execute(message, args) {
-        message.reply(message.author.displayAvatarURL());
+        message.react('👍');
+        message.reply(message.author.displayAvatarURL());        
         // message.reply({embed: {
         //     color: 3447003,
         //     description: message.author.displayAvatarURL()

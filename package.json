@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/Raphile14/ServerUtilityBot#readme",
   "dependencies": {
-    "discord.js": "^12.3.1"
+    "discord.js": "^12.3.1",
+    "download": "^8.0.0",
+    "mongoose": "^5.10.2",
+    "xlsx": "^0.16.6"
   }
 }
