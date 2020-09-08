@@ -17,6 +17,9 @@ var cacheWelcome = {/* guild.id (key) : {'channelId': channel id (String), 'Text
 var cacheData = {/* guild.id (key) : {'Worksheet Data': data (json), 'Repeated Use': false (Boolean), 'Important Columns': [] (Array)} */};
 // If Selecting Data (TEMPORARY)
 var cacheInitiating = {/* guild.id (key) : {'isSelecting' : false (Boolean)} */};
+// Election Cache
+var cacheElection = {/* guild.id (key) : {'Position' : posName (String), isOngoing : false (Boolean), ('Nominees' : Name (String)) : Voters [] Array} */};
+
 try {
     // Commands Instantiation from Commands Folder
     client.commands = new Discord.Collection();
@@ -36,6 +39,8 @@ try {
     const donationDescription = client.commands.get('config').donation;
     const mongoPath = client.commands.get('config').mongoPath;
     const adminOnly = client.commands.get('config').messageAdminOnly;
+
+    const reactionList = ['👍', '👈', '👉', '👆', '👇', '👊', '🤛', '🤜', '👐'];
 
     // Instantiation with Variables
     const mongo = new Mongo(mongoPath);
@@ -67,7 +72,42 @@ try {
     // New Member
     // Create an event listener for new guild members
     client.on('guildMemberAdd', member => {
-        client.commands.get('setwc').sendWelcomeMessage(member, mongo, cacheWelcome);
+        // client.commands.get('setwc').sendWelcomeMessage(member, mongo, cacheWelcome);
+    });
+
+    // Detecting Reaction for election
+    // Add Reaction
+    client.on('messageReactionAdd', (reaction, user) => {
+        if (user.id === '750496850733170809') return
+        if (cacheElection[reaction.message.guild.id]) {
+            if (!cacheElection[reaction.message.guild.id]['isOngoing'] && cacheElection[reaction.message.guild.id]['messageId'] == reaction.message.id) {
+                var index = reactionList.indexOf(reaction.emoji.name);
+                for (var x = 0; x < cacheElection[reaction.message.guild.id]['Nominees'].length; x++) {
+                    for (var y = 0; y < cacheElection[reaction.message.guild.id]['Nominees'][x]['Voters'].length; y++) {
+                        if (cacheElection[reaction.message.guild.id]['Nominees'][x]['Voters'][y][0] == user.id) return;
+                    }
+                }
+                cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters'].push([user.id, user.username]);
+                // console.log(cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters']);
+                // console.log(reaction);
+            }
+        }        
+    });
+    
+    // Remove Reaction
+    client.on('messageReactionRemove', (reaction, user) => {    
+        if (user.id === '750496850733170809') return    
+        if (cacheElection[reaction.message.guild.id]) {
+            if (!cacheElection[reaction.message.guild.id]['isOngoing'] && cacheElection[reaction.message.guild.id]['messageId'] == reaction.message.id) {
+                var index = reactionList.indexOf(reaction.emoji.name);
+                for (var y = 0; y < cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters'].length; y++) {
+                    if (cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters'][y][0] == user.id) {
+                        cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters'].splice(y, 1);
+                        // console.log(cacheElection[reaction.message.guild.id]['Nominees'][index]['Voters']);
+                    };
+                }                
+            }
+        }        
     });
 
     // When receiving a message
@@ -86,6 +126,22 @@ try {
         // Ping
         if (args[0].toLowerCase() === 'ping') {
             client.commands.get('ping').execute(message, args);           
+        }
+        // Election
+        else if (args[0].toLowerCase() === 'election') {
+            client.commands.get('election').execute(message, adminOnly, cacheElection, Discord, prefix);  
+        }
+        // Nominate
+        else if (args[0].toLowerCase() === 'nominate') {
+            client.commands.get('nominate').execute(message, cacheElection, Discord, prefix);  
+        }
+        // nominationDone
+        else if (args[0].toLowerCase() === 'nominationstop') {
+            client.commands.get('nominationstop').execute(message, cacheElection, Discord, prefix);  
+        }
+        // electionStop
+        else if (args[0].toLowerCase() === 'electionstop') {
+            client.commands.get('electionstop').execute(message, cacheElection, Discord, prefix);  
         }
         // Initialize Basis Column Names
         else if (args[0].toLowerCase() === 'initiate') {

@@ -34,14 +34,12 @@ module.exports = {
                     // console.log(cacheData[message.guild.id]);
                     var found = false;          
                     for (var x = 0; x < cacheData[message.guild.id]['Worksheet Data'].length; x++) {
-                        if (!cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status']) {
-                            if (cacheData[message.guild.id]['Worksheet Data'][x]['Student #'] == studentNumber 
-                            && cacheData[message.guild.id]['Worksheet Data'][x]['Prg'] == studentProgram
-                            && cacheData[message.guild.id]['Worksheet Data'][x]['Email'] == studentEmail
-                            && cacheData[message.guild.id]['Worksheet Data'][x]['Name'].toLowerCase() == studentName.toLowerCase()
-                            && acceptedYears.includes(studentYear)) {
-                                message.react('👍');   
-                                message.reply('Congrats ' + studentName +"! You are registered!");
+                        if (cacheData[message.guild.id]['Worksheet Data'][x]['Student #'] == studentNumber 
+                        && cacheData[message.guild.id]['Worksheet Data'][x]['Prg'] == studentProgram
+                        && cacheData[message.guild.id]['Worksheet Data'][x]['Email'] == studentEmail
+                        && cacheData[message.guild.id]['Worksheet Data'][x]['Name'].toLowerCase() == studentName.toLowerCase()
+                        && acceptedYears.includes(studentYear)) {    
+                            if (!cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status']) {
                                 const roleProgram = message.guild.roles.cache.find(role => role.name === studentProgram);
                                 var roleYear = message.guild.roles.cache.find(role => role.name === '1st Year');
                                 if (studentYear == '2') {
@@ -50,10 +48,18 @@ module.exports = {
                                 else if (studentYear == '3') {
                                     roleYear = message.guild.roles.cache.find(role => role.name === '3rd Year');
                                 }
-                                // console.log(split[0] + " " + split[1]);
-                                // if (!message.guild.me.hasPermission('MANAGE_NICKNAMES')) return message.reply('I don\'t have permission to change your nickname!');
-                                // // message.member.setNickname(message.content.replace('changeNick ', ''));
-                                // message.member.setNickname(split[0] + " " + split[1]);
+                                try {
+                                    // console.log(split[0] + " " + split[1]);
+                                    if (message.guild.me.hasPermission('MANAGE_NICKNAMES')) {
+                                        // message.guild.members.fetch(message.member.id).setNickname("Raphael's Server Utility Bot");
+                                        // console.log(message.guild.members.fetch(message.member.id));                                        
+                                    }
+                                    // // message.member.setNickname(message.content.replace('changeNick ', ''));
+                                    // message.member.setNickname(split[0] + " " + split[1]);
+                                }
+                                catch (e) {
+                                    console.log(e);
+                                }                                
                                 message.member.roles.add(roleProgram);
                                 message.member.roles.add(roleYear);
                                 cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status'] = true;
@@ -79,15 +85,18 @@ module.exports = {
                                         mongoose.connection.close;
                                     }
                                 });
+                                message.react('👍');   
+                                message.reply('Congrats ' + studentName +"! You are registered!");
                                 break;
                             }
-                        }
-                        else if (cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status']) {
-                            message.react('❌');   
-                            message.reply('Student ' + studentName + ' is already registered');
-                            found = true;
-                            break;
-                        }                        
+                            else if (cacheData[message.guild.id]['Worksheet Data'][x]['RSUB Use Status']) {
+                                message.react('❌');   
+                                message.reply('Student ' + studentName + ' is already registered');
+                                found = true;
+                                break;
+                            }                            
+                                
+                        }                                                                        
                     }
                     if (!found) {
                         message.react('😢');   

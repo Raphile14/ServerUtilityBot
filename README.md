@@ -4,13 +4,13 @@ A Discord Utility Bot for handling certain processes.
 
 # Implemented Features
 - Welcome Message for New Members
+- Election Based from Reactions
 
 # Planned Features
-- Election Based from Reactions
 - Roles based from Excel Sheet
 
 # Changelog
-indev 1.0.1 (September 4, 2020)
+indev 1.0.1 (September 9, 2020)
 - Code changes
 
 indev 1.0.0 (September 4, 2020)
