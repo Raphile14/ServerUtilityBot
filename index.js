@@ -166,7 +166,7 @@ try {
         }
         // Read Data
         else if (args[0].toLowerCase() === 'read') {
-            client.commands.get('read').check(message, adminOnly, cacheData, Discord, mongo, args);  
+            // client.commands.get('read').check(message, adminOnly, cacheData, Discord, mongo, args);  
         }
         // Set Repeatable
         else if (args[0].toLowerCase() === 'repeatable') {
@@ -200,7 +200,8 @@ try {
     });
 
     // Must Be Last Line. Code to Login Bot to Discord Server
-    client.login(process.env.BOT_TOKEN);
+    // client.login(process.env.BOT_TOKEN);
+    client.login('NzUwNDk2ODUwNzMzMTcwODA5.X07YqA.1iB2r7zSyvRtAL2DnyUVzpcNqSk');
 }
 catch (err) {
     utility.log(1, err); 

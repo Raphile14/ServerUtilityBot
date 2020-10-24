@@ -60,5 +60,8 @@ module.exports = {
         }
         message.react('😮');
         message.reply(embed);
+        if (cacheElection[message.guild.id]['Nominees'].length == 9) {
+            message.reply("Maximum number of nominations reached! End nominations by typing " + prefix + " nominationStop");
+        }
     }
 }

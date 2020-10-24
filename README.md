@@ -10,6 +10,9 @@ A Discord Utility Bot for handling certain processes.
 - Roles based from Excel Sheet
 
 # Changelog
+indev 1.1.0 (October 24, 2020)
+- Disabling certain actions
+
 indev 1.0.1 (September 9, 2020)
 - Code changes
 

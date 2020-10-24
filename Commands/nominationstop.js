@@ -27,7 +27,7 @@ module.exports = {
         .setColor(3447003)
         .setDescription('Here are the candidates for the position of ' + cacheElection[message.guild.id]['Position'] + '!' 
         + '\n\nVote your choice by pressing the corresponding emoji!' 
-        +'\n\nWhen done type ' + prefix + ' electionDone' 
+        +'\n\nWhen done type ' + prefix + ' electionStop' 
         +'\n\nCurrent Nominees');
         for (var x = 0; x < cacheElection[message.guild.id]['Nominees'].length; x++) {
             embed.addFields({
